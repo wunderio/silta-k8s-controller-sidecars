@@ -1,7 +1,7 @@
-FROM golang:1.10 AS build
+FROM golang:1.15 AS build
 WORKDIR /go/src/github.com/wunderio/silta-k8s-controller-sidecars
 ADD . /go/src/github.com/wunderio/silta-k8s-controller-sidecars
-RUN go get -v
+RUN go get -d
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -a -installsuffix cgo -o main .
 
 RUN apt-get update && apt-get install -y upx
